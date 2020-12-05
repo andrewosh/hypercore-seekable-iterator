@@ -1,4 +1,5 @@
 # hypercore-seekable-iterator
+![Test on Node.js](https://github.com/andrewosh/hypercore-seekable-iterator/workflows/Test%20on%20Node.js/badge.svg)
 
 A seekable AsyncIterator for Hypercores that supports AbortControllers for cancellation, and block prefetching.
 
