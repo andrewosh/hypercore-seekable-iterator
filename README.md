@@ -43,8 +43,8 @@ Options include:
   byteOffset, // The initial byte offset
   byteLength, // The size of the range to read (defines the end position)
   startBlock, // (Optimization) If you know which block the start position is in, this speeds up the first read
-  endBlock    // (Optimization) If you know which block the end position is in, this speeds up the first read,
-  prefetcher  // An Prefetcher instance (described below)
+  endBlock,   // (Optimization) If you know which block the end position is in, this speeds up the first read,
+  prefetch    // A function of the form (ite, index) => (download range)
 ```
 
 #### `await ite.next()`
@@ -53,17 +53,15 @@ Yield the next chunk.
 #### `ite.seek(pos)`
 Seek to a numeric position relative to the initial starting byte offset (e.g. `ite.seek(0)` will return to the initial position).
 
-### Prefetcher
-You can pass in a custom prefetcher to define how blocks should be downloaded in the background during iteration.
+### Prefetch
+You can pass in a custom prefetching function to define how blocks should be downloaded in the background during iteration.
 
-The default prefetcher will always download the next 10 blocks. In the future, this will become adaptive!
+The default prefetch will always download the next 10 blocks. In the future, this will become adaptive!
 
-A prefetcher is any object with a `prefetch` method that returns arguments to Hypercore's `download` method:
+A prefetch function returns arguments to Hypercore's `download` method:
 ```js
-class CustomPrefetcher () {
-  prefetch (ite, index) {
-    return { start: index + 1, end: index + 5, linear: true }
-  }
+function customPrefetch (ite, index) {
+  return { start: index + 1, end: index + 5, linear: true }
 }
 ```
 `ite` is an instance of HypercoreSeekableIterator (you can use this to determine download bounds).

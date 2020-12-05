@@ -42,8 +42,12 @@ module.exports = class HypercoreSeekableIterator {
     this.position = this.start
 
     this._controller = new AbortController()
-    this._prefetcher = opts.prefetcher || new SparsePrefetcher(opts)
+    this._prefetch = opts.prefetch
     this._lastPrefetch = null
+    if (!this._prefetch) {
+      const prefetcher = new SparsePrefetcher(opts)
+      this._prefetch = prefetcher.prefetch.bind(prefetcher)
+    }
 
     this._seeking = this.position
     this._opened = false
@@ -95,7 +99,7 @@ module.exports = class HypercoreSeekableIterator {
       return this.next()
     }
 
-    const prefetch = this._prefetcher.prefetch(this, this._index)
+    const prefetch = this._prefetch(this, this._index)
     if (prefetch) {
       if (this._lastPrefetch) this.core.undownload(this._lastPrefetch)
       this._lastPrefetch = this.core.download(prefetch)
