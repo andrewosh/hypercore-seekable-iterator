@@ -1,0 +1,33 @@
+{
+  "name": "hypercore-seekable-iterator",
+  "version": "1.0.0",
+  "description": "An async iterator for Hypercores that supports seek",
+  "main": "index.js",
+  "scripts": {
+    "test": "standard && tape test/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andrewosh/hypercore-seekable-iterator.git"
+  },
+  "keywords": [
+    "hypercore",
+    "seek",
+    "iterator"
+  ],
+  "author": "Andrew Osheroff <andrewosh@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/andrewosh/hypercore-seekable-iterator/issues"
+  },
+  "homepage": "https://github.com/andrewosh/hypercore-seekable-iterator#readme",
+  "devDependencies": {
+    "hypercore": "^9.6.0",
+    "random-access-memory": "^3.1.1",
+    "standard": "^16.0.3",
+    "tape": "^5.0.1"
+  },
+  "dependencies": {
+    "abort-controller": "^3.0.0"
+  }
+}
