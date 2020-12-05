@@ -1,6 +1,6 @@
 {
   "name": "hypercore-seekable-iterator",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "An async iterator for Hypercores that supports seek",
   "main": "index.js",
   "scripts": {
